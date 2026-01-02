@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Frameserve Info</title>
+
+  <link rel="icon" type="image/svg+xml" href="/static/camera.svg" />
+  <link rel="apple-touch-icon" href="/static/camera.svg" />
+  <meta name="theme-color" content="#000000" />
+
+  <style>
+    :root { color-scheme: dark; }
+    body {
+      margin: 0;
+      padding: 24px;
+      background: #000;
+      color: #fff;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      line-height: 1.5;
+    }
+    .wrap { max-width: 920px; margin: 0 auto; }
+    a { color: #9ad1ff; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    code, pre {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    }
+    pre {
+      background: rgba(255,255,255,0.08);
+      padding: 12px 14px;
+      border-radius: 10px;
+      overflow: auto;
+    }
+    .card {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.10);
+      border-radius: 14px;
+      padding: 16px 18px;
+      margin: 14px 0;
+    }
+    h1, h2, h3 { margin: 0 0 10px 0; line-height: 1.2; }
+    h2 { margin-top: 18px; }
+    .muted { opacity: 0.85; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+      overflow: hidden;
+      border-radius: 12px;
+    }
+    th, td {
+      text-align: left;
+      padding: 10px 12px;
+      border-bottom: 1px solid rgba(255,255,255,0.10);
+      vertical-align: top;
+    }
+    th { background: rgba(255,255,255,0.08); font-weight: 600; }
+    tr:last-child td { border-bottom: none; }
+    .pill {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.10);
+      border: 1px solid rgba(255,255,255,0.12);
+      font-size: 12px;
+      margin-left: 8px;
+      opacity: 0.9;
+    }
+    .row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .btn {
+      display: inline-block;
+      padding: 10px 14px;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.10);
+      border: 1px solid rgba(255,255,255,0.14);
+    }
+    .btn:hover { background: rgba(255,255,255,0.14); text-decoration: none; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Frameserve Info</h1>
+    <p class="muted">
+      Frameserve is a “digital photo frame” slideshow served over the web. It reads images from the server’s mounted
+      <code>/photos</code> directory and displays them one at a time. No gallery. No uploads.
+    </p>
+
+    <div class="row">
+      <a class="btn" href="/">Go to slideshow</a>
+      <a class="btn" href="/?hud=1">Slideshow (HUD)</a>
+    </div>
+
+    <div class="card">
+      <h2>Authentication (optional, long-lived)</h2>
+      <p class="muted">
+        If the server is configured with <code>AUTH_TOKEN</code>, you must authenticate to use Frameserve.
+        This is designed for “set it and forget it” devices.
+      </p>
+      <ol>
+        <li>
+          On a device, open the slideshow once with the token in the URL:
+          <code>/?token=YOURTOKEN</code>
+        </li>
+        <li>
+          Frameserve stores a long-lived cookie (1 year) and redirects you to the same URL without the token.
+        </li>
+        <li>
+          After that, the device stays logged in until cookies are cleared.
+        </li>
+      </ol>
+      <p class="muted">
+        Also supported: <code>Authorization: Bearer YOURTOKEN</code>.
+      </p>
+    </div>
+
+    <div class="card">
+      <h2>How to use</h2>
+      <ol>
+        <li>Put your images into the host folder mounted as <code>./photos</code> (compose maps that to <code>/photos</code>).</li>
+        <li>Open <a href="/">/</a> to start the slideshow.</li>
+        <li>Optional: add querystring params to change behavior (below).</li>
+      </ol>
+    </div>
+
+    <div class="card">
+      <h2>Keyboard shortcuts (slideshow)</h2>
+      <ul>
+        <li><code>Space</code> — pause / resume</li>
+        <li><code>←</code> / <code>→</code> — previous / next photo</li>
+        <li><code>F</code> — fullscreen toggle</li>
+        <li><code>H</code> — toggle HUD</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>Querystring parameters</h2>
+      <p class="muted">
+        Add these to the slideshow URL, like <code>/?seconds=15&amp;shuffle=1&amp;fit=cover&amp;hud=1</code>.
+      </p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Param</th>
+            <th>Values</th>
+            <th>Default</th>
+            <th>What it does</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>seconds</code></td>
+            <td>integer (1..3600)</td>
+            <td><code>10</code></td>
+            <td>Time each photo stays on screen before advancing.</td>
+          </tr>
+          <tr>
+            <td><code>shuffle</code></td>
+            <td><code>1</code>/<code>0</code> (or true/false)</td>
+            <td><code>1</code></td>
+            <td>Randomize photo order. When enabled, next/prev picks random photos.</td>
+          </tr>
+          <tr>
+            <td><code>fit</code></td>
+            <td><code>contain</code> or <code>cover</code></td>
+            <td><code>contain</code></td>
+            <td>
+              <code>contain</code> shows the whole image (may letterbox).
+              <code>cover</code> fills the screen (may crop).
+            </td>
+          </tr>
+          <tr>
+            <td><code>hud</code></td>
+            <td><code>1</code>/<code>0</code></td>
+            <td><code>0</code></td>
+            <td>Show an on-screen status overlay (useful for debugging).</td>
+          </tr>
+          <tr>
+            <td><code>order</code></td>
+            <td>
+              <code>mtime_desc</code>, <code>mtime_asc</code>,
+              <code>name_asc</code>, <code>name_desc</code>
+            </td>
+            <td><code>mtime_desc</code></td>
+            <td>Controls the ordering returned by the server’s <code>/api/photos</code> endpoint.</td>
+          </tr>
+          <tr>
+            <td><code>refresh</code></td>
+            <td>integer (5..3600)</td>
+            <td><code>60</code></td>
+            <td>How often (in seconds) the slideshow re-fetches the directory listing to detect added/removed photos.</td>
+          </tr>
+          <tr>
+            <td><code>awake</code></td>
+            <td><code>1</code>/<code>0</code></td>
+            <td><code>1</code></td>
+            <td>
+              Best-effort request for the browser to keep the screen awake (Wake Lock API).
+              Some devices/browsers may ignore this due to power settings.
+              <span class="pill">best-effort</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card">
+      <h2>Examples</h2>
+      <pre><code>/?hud=1
+/?seconds=15&amp;shuffle=1&amp;fit=cover&amp;hud=1
+/?seconds=30&amp;shuffle=0&amp;order=name_asc&amp;refresh=120
+/?awake=0</code></pre>
+    </div>
+
+    <div class="card">
+      <h2>Endpoints</h2>
+      <ul>
+        <li><code>/</code> — slideshow</li>
+        <li><code>/info</code> — this page</li>
+        <li><code>/api/photos</code> — JSON listing of photos</li>
+        <li><code>/photos/&lt;filename&gt;</code> — serves an individual image file (allowed extensions only)</li>
+        <li><code>/healthz</code> — health check</li>
+      </ul>
+    </div>
+
+    <p class="muted">
+      Tip: bookmark your favorite slideshow URL with params (e.g. <code>/?seconds=15&amp;shuffle=1&amp;fit=cover</code>).
+    </p>
+  </div>
+</body>
+</html>

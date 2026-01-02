@@ -1,0 +1,14 @@
+services:
+  frameserve:
+    build: .
+    image: davidhfrankelcodes/frameserve:${IMAGE_TAG:-latest}
+    container_name: ${CONTAINER_NAME:-frameserve}
+    ports:
+      - "${HOST_PORT:-8080}:80"
+    volumes:
+      - ./photos:/photos:ro
+    environment:
+      - PORT=${PORT:-80}
+      - PHOTOS_DIR=/photos
+      - AUTH_TOKEN=${AUTH_TOKEN:-change-me-to-your-password}
+    restart: ${RESTART_POLICY:-unless-stopped}

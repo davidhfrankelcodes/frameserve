@@ -1,0 +1,8 @@
+.git
+.gitignore
+**/*.log
+photos
+out
+dist
+node_modules
+.env.example

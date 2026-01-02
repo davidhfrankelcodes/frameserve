@@ -1,0 +1,60 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  background: #000;
+  overflow: hidden;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+}
+
+.stage {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  background: #000;
+}
+
+.layer {
+  position: absolute;
+  inset: 0;
+}
+
+.photo {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* default “frame-like” behavior */
+  background: #000;
+  opacity: 0;
+  transition: opacity 900ms ease-in-out;
+}
+
+.photo.visible {
+  opacity: 1;
+}
+
+.hud {
+  position: absolute;
+  left: 12px;
+  bottom: 12px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: rgba(0,0,0,0.45);
+  color: #fff;
+  backdrop-filter: blur(6px);
+  max-width: min(650px, calc(100% - 24px));
+}
+
+.hud.hidden {
+  display: none;
+}
+
+.hud-row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.small {
+  opacity: 0.85;
+  font-size: 12px;
+}

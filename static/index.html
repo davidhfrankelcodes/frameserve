@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+  <title>Frameserve</title>
+
+  <!-- App icon / favicon -->
+  <link rel="icon" type="image/svg+xml" href="/static/camera.svg" />
+  <link rel="apple-touch-icon" href="/static/camera.svg" />
+
+  <!-- Optional: nicer tab color on supported browsers -->
+  <meta name="theme-color" content="#000000" />
+
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body>
+  <div id="stage" class="stage">
+    <img id="imgA" class="photo layer visible" alt="" />
+    <img id="imgB" class="photo layer" alt="" />
+    <div id="hud" class="hud hidden">
+      <div class="hud-row">
+        <span id="status"></span>
+      </div>
+      <div class="hud-row small">
+        <span>Space: pause • ←/→: prev/next • F: fullscreen • H: toggle HUD</span>
+      </div>
+    </div>
+  </div>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
