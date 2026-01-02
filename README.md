@@ -73,6 +73,7 @@ Here’s the simplest `docker-compose.yaml`:
 services:
   frameserve:
     image: davidhfrankelcodes/frameserve:latest
+    restart: unless-stopped
     ports:
       - "8080:80"
     volumes:
