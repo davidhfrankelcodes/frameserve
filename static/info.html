@@ -3,96 +3,28 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Frameserve Info</title>
+  <title>Frameserve · Info</title>
 
   <link rel="icon" type="image/svg+xml" href="/static/camera.svg" />
   <link rel="apple-touch-icon" href="/static/camera.svg" />
   <meta name="theme-color" content="#000000" />
 
-  <style>
-    :root { color-scheme: dark; }
-    body {
-      margin: 0;
-      padding: 24px;
-      background: #000;
-      color: #fff;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      line-height: 1.5;
-    }
-    .wrap { max-width: 920px; margin: 0 auto; }
-    a { color: #9ad1ff; text-decoration: none; }
-    a:hover { text-decoration: underline; }
-    code, pre {
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-    }
-    pre {
-      background: rgba(255,255,255,0.08);
-      padding: 12px 14px;
-      border-radius: 10px;
-      overflow: auto;
-    }
-    .card {
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.10);
-      border-radius: 14px;
-      padding: 16px 18px;
-      margin: 14px 0;
-    }
-    h1, h2, h3 { margin: 0 0 10px 0; line-height: 1.2; }
-    h2 { margin-top: 18px; }
-    .muted { opacity: 0.85; }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 10px;
-      overflow: hidden;
-      border-radius: 12px;
-    }
-    th, td {
-      text-align: left;
-      padding: 10px 12px;
-      border-bottom: 1px solid rgba(255,255,255,0.10);
-      vertical-align: top;
-    }
-    th { background: rgba(255,255,255,0.08); font-weight: 600; }
-    tr:last-child td { border-bottom: none; }
-    .pill {
-      display: inline-block;
-      padding: 2px 8px;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.10);
-      border: 1px solid rgba(255,255,255,0.12);
-      font-size: 12px;
-      margin-left: 8px;
-      opacity: 0.9;
-    }
-    .row {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-      align-items: center;
-    }
-    .btn {
-      display: inline-block;
-      padding: 10px 14px;
-      border-radius: 12px;
-      background: rgba(255,255,255,0.10);
-      border: 1px solid rgba(255,255,255,0.14);
-    }
-    .btn:hover { background: rgba(255,255,255,0.14); text-decoration: none; }
-  </style>
+  <link rel="stylesheet" href="/static/info.css" />
 </head>
 <body>
   <div class="wrap">
-    <h1>Frameserve Info</h1>
-    <p class="muted">
-      Frameserve is a “digital photo frame” slideshow served over the web. It reads images from the server’s mounted
-      <code>/photos</code> directory and displays them one at a time. No gallery. No uploads.
-    </p>
 
-    <div class="row">
-      <a class="btn" href="/">Go to slideshow</a>
-      <a class="btn" href="/?hud=1">Slideshow (HUD)</a>
+    <div class="card">
+      <h1>Frameserve · Info</h1>
+      <p class="muted">
+        Frameserve is a “digital photo frame” slideshow served over the web. It reads images from the server’s mounted
+        <code>/photos</code> directory and displays them one at a time. No gallery. No uploads.
+      </p>
+
+      <div class="actions">
+        <a class="btn" href="/">Go to slideshow</a>
+        <a class="btn" href="/?hud=1">Slideshow (HUD)</a>
+      </div>
     </div>
 
     <div class="card">
@@ -202,15 +134,12 @@
             <td>
               Best-effort request for the browser to keep the screen awake (Wake Lock API).
               Some devices/browsers may ignore this due to power settings.
-              <span class="pill">best-effort</span>
+              <span class="muted">best-effort</span>
             </td>
           </tr>
         </tbody>
       </table>
-    </div>
 
-    <div class="card">
-      <h2>Examples</h2>
       <pre><code>/?hud=1
 /?seconds=15&amp;shuffle=1&amp;fit=cover&amp;hud=1
 /?seconds=30&amp;shuffle=0&amp;order=name_asc&amp;refresh=120
@@ -226,11 +155,12 @@
         <li><code>/photos/&lt;filename&gt;</code> — serves an individual image file (allowed extensions only)</li>
         <li><code>/healthz</code> — health check</li>
       </ul>
+
+      <p class="muted">
+        Tip: bookmark your favorite slideshow URL with params (e.g. <code>/?seconds=15&amp;shuffle=1&amp;fit=cover</code>).
+      </p>
     </div>
 
-    <p class="muted">
-      Tip: bookmark your favorite slideshow URL with params (e.g. <code>/?seconds=15&amp;shuffle=1&amp;fit=cover</code>).
-    </p>
   </div>
 </body>
 </html>

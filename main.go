@@ -286,7 +286,7 @@ func sortPhotos(photos []Photo, order string) {
 	case "mtime_asc":
 		sort.Slice(photos, func(i, j int) bool { return photos[i].Mtime < photos[j].Mtime })
 	case "name_asc":
-		sort.Slice(photos, func(i, j int) bool { return strings.ToLower(photos[i].Name) < strings.ToLower(photos[j].Name) })
+		sort.Slice(photos, func(i, j int) bool { return strings.ToLower(photos[i].Name) < strings.ToLower(photos[i].Name) })
 	case "name_desc":
 		sort.Slice(photos, func(i, j int) bool { return strings.ToLower(photos[i].Name) > strings.ToLower(photos[j].Name) })
 	case "mtime_desc", "":
@@ -450,24 +450,26 @@ func unauthorized(w http.ResponseWriter, r *http.Request) {
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>Frameserve - Unauthorized</title>
-  <style>
-    :root{color-scheme:dark}
-    body{margin:0;padding:24px;background:#000;color:#fff;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;line-height:1.5}
-    code{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace}
-    .card{max-width:920px;margin:0 auto;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.10);border-radius:14px;padding:16px 18px}
-    a{color:#9ad1ff;text-decoration:none} a:hover{text-decoration:underline}
-  </style>
+  <title>Frameserve · Unauthorized</title>
+  <link rel="icon" type="image/svg+xml" href="/static/camera.svg" />
+  <link rel="apple-touch-icon" href="/static/camera.svg" />
+  <meta name="theme-color" content="#000000" />
+  <link rel="stylesheet" href="/static/info.css" />
 </head>
 <body>
-  <div class="card">
-    <h1>Unauthorized</h1>
-    <p>This Frameserve instance requires a shared access token.</p>
-    <p><strong>One-time setup on this device:</strong></p>
-    <p>Open this URL once (replace <code>YOURTOKEN</code>):</p>
-    <p><code>`+htmlEscape(r.URL.Path)+`?token=YOURTOKEN</code></p>
-    <p>After that, the device will stay logged in via a long-lived cookie.</p>
-    <p class="muted">If you cleared cookies or switched browsers, repeat the one-time setup.</p>
+  <div class="wrap">
+    <div class="card">
+      <h1>Unauthorized</h1>
+      <p>This Frameserve instance requires a shared access token.</p>
+      <p><strong>One-time setup on this device:</strong></p>
+      <p>Open this URL once (replace <code>YOURTOKEN</code>):</p>
+      <p><code>`+htmlEscape(r.URL.Path)+`?token=YOURTOKEN</code></p>
+      <p>After that, the device will stay logged in via a long-lived cookie.</p>
+      <p class="muted">If you cleared cookies or switched browsers, repeat the one-time setup.</p>
+      <div class="actions">
+        <a class="btn" href="/info">How it works</a>
+      </div>
+    </div>
   </div>
 </body>
 </html>`)
